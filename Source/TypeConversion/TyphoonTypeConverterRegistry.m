@@ -18,10 +18,11 @@
 #import "TyphoonNSURLTypeConverter.h"
 #import "TyphoonIntrospectionUtils.h"
 #import "TyphoonNSNumberTypeConverter.h"
-#if TARGET_OS_IPHONE || TARGET_OS_TV
+
+#if TARGET_OS_IOS || TARGET_OS_TV
     #import "TyphoonUIColorTypeConverter.h"
     #import "TyphoonBundledImageTypeConverter.h"
-#else
+#elif !TARGET_OS_WATCH && TARGET_OS_MAC
     #import "TyphoonNSColorTypeConverter.h"
 #endif
 
@@ -94,12 +95,12 @@
 
 - (void)registerPlatformConverters
 {
-#if TARGET_OS_IPHONE || TARGET_OS_TV
+#if TARGET_OS_IOS || TARGET_OS_TV
     {
         [self registerTypeConverter:[TyphoonClassFromClass([TyphoonUIColorTypeConverter class]) new]];
         [self registerTypeConverter:[TyphoonClassFromClass([TyphoonBundledImageTypeConverter class])new]];
     }
-#else
+#elif !TARGET_OS_WATCH && TARGET_OS_MAC
     {
         [self registerTypeConverter:[TyphoonClassFromClass([TyphoonNSColorTypeConverter class]) new]];
     }

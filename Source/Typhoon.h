@@ -43,7 +43,7 @@ FOUNDATION_EXPORT const unsigned char TyphoonVersionString[];
 #import "TyphoonDefinitionNamespace.h"
 #import "NSObject+FactoryHooks.h"
 
-#if TARGET_OS_IPHONE || TARGET_OS_TV
+#if TARGET_OS_IOS || TARGET_OS_TV
 #import "TyphooniOS.h"
 #endif
 

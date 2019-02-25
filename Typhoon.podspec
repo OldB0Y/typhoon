@@ -10,12 +10,14 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target = '5.0'
   spec.osx.deployment_target = '10.9'
   spec.tvos.deployment_target = '9.0'
+  spec.watchos.deployment_target = '2.0'
 
   spec.source_files = 'Source/**/*.{h,m}'
   non_arc_files = 'Source/Factory/Internal/NSInvocation+TCFInstanceBuilder.{h,m}'
   spec.ios.exclude_files = 'Source/osx', non_arc_files
   spec.osx.exclude_files = 'Source/ios', non_arc_files
   spec.tvos.exclude_files = 'Source/osx', non_arc_files
+  spec.watchos.exclude_files = 'Source/osx', 'Source/ios', non_arc_files
 
   spec.requires_arc = true
   spec.subspec 'no-arc' do |sna|

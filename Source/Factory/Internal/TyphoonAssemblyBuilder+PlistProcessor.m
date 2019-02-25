@@ -40,7 +40,7 @@
     NSArray *names = nil;
     
     NSDictionary *bundleInfoDictionary = [bundle infoDictionary];
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         names = bundleInfoDictionary[@"TyphoonInitialAssemblies(iPad)"];
     } else {

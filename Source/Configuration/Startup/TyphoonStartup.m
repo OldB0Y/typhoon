@@ -23,15 +23,15 @@
 
 #import <objc/runtime.h>
 
-#if TARGET_OS_IPHONE || TARGET_OS_TV
+#if TARGET_OS_IOS || TARGET_OS_TV
 #define ApplicationClass [UIApplication class]
-#elif TARGET_OS_MAC
+#elif !TARGET_OS_WATCH && TARGET_OS_MAC
 #define ApplicationClass [NSApplication class]
 #endif
 
-#if TARGET_OS_IPHONE || TARGET_OS_TV
+#if TARGET_OS_IOS || TARGET_OS_TV
 #define ApplicationDidFinishLaunchingNotification UIApplicationDidFinishLaunchingNotification
-#elif TARGET_OS_MAC
+#elif !TARGET_OS_WATCH && TARGET_OS_MAC
 #define ApplicationDidFinishLaunchingNotification NSApplicationDidFinishLaunchingNotification
 #endif
 
@@ -40,7 +40,9 @@
 
 + (void)load
 {
+#if TARGET_OS_IOS || TARGET_OS_TV
     [self swizzleSetDelegateMethodOnApplicationClass];
+#endif
 }
 
 + (TyphoonComponentFactory *)factoryFromAppDelegate:(id)appDelegate
@@ -89,6 +91,7 @@ static id initialAppDelegate = nil;
     return initialFactory;
 }
 
+#if TARGET_OS_IOS || TARGET_OS_TV
 + (void)swizzleSetDelegateMethodOnApplicationClass
 {
     SEL sel = @selector(setDelegate:);
@@ -144,6 +147,7 @@ static id initialAppDelegate = nil;
             [weakSelf releaseInitialFactory];
         }];
 }
+#endif
 
 + (void)releaseInitialFactory
 {

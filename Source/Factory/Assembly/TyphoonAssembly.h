@@ -14,7 +14,7 @@
 #import "TyphoonDefinition.h"
 #import "TyphoonDefinition+Option.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS || TARGET_OS_TV
 #import "TyphoonDefinition+Storyboard.h"
 #endif
 
